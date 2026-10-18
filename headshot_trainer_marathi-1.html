@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#071426">
+<title>Headshot Trainer Marathi</title>
+<style>
+:root{--bg:#071426;--panel:#10233e;--line:#254568;--yellow:#ffd43b;--cyan:#36d9ff;--green:#48f59a;--text:#f4f8ff;--muted:#a9bdd5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#12315a 0,#071426 55%);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif;min-height:100vh}
+header{padding:22px 16px 12px;text-align:center}h1{font-size:clamp(24px,7vw,36px);margin:0;color:var(--yellow);letter-spacing:.3px}header p{color:var(--muted);margin:8px 0 0;font-size:14px}
+.wrap{max-width:760px;margin:auto;padding:12px;display:grid;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat,.panel{background:linear-gradient(145deg,#122a49,#0c1c32);border:1px solid var(--line);border-radius:16px;padding:13px}.stat{text-align:center}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:23px;color:var(--yellow);margin-top:3px}
+h2{font-size:18px;margin:0 0 10px}.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.btn{border:1px solid #315477;background:#163252;color:var(--text);border-radius:12px;padding:12px 10px;font-weight:700;font-size:14px;cursor:pointer}.btn.active,.btn.primary{background:var(--yellow);color:#171b22;border-color:var(--yellow)}.btn:active{transform:scale(.98)}
+#arena{height:min(48vh,370px);min-height:260px;background:linear-gradient(#0d2846,#09172a);border:1px solid #315477;border-radius:16px;position:relative;overflow:hidden;touch-action:manipulation}
+#arena:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 95%,#24486b 95%),linear-gradient(90deg,transparent 95%,#24486b 95%);background-size:32px 32px;opacity:.22;pointer-events:none}
+#message{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);padding:24px;pointer-events:none}
+.target{position:absolute;width:58px;height:58px;border:5px solid #ff4d67;border-radius:50%;background:radial-gradient(circle,#fff 0 12%,#ff4d67 13% 27%,#fff 28% 44%,#ff4d67 45% 61%,#fff 62%);box-shadow:0 0 20px #ff4d6770;transform:translate(-50%,-50%);cursor:crosshair;touch-action:manipulation}
+.target:after{content:"";position:absolute;left:50%;top:-8px;height:64px;width:2px;background:#ff4d67;transform:translateX(-50%);opacity:.7}.target:before{content:"";position:absolute;top:50%;left:-8px;width:64px;height:2px;background:#ff4d67;transform:translateY(-50%);opacity:.7}
+.actions{display:flex;gap:8px}.actions .btn{flex:1}.note{font-size:12px;line-height:1.5;color:var(--muted)}label{display:block;margin:12px 0 5px;color:var(--muted);font-size:13px}input[type=range]{width:100%;accent-color:var(--yellow)}footer{text-align:center;color:var(--muted);font-size:12px;padding:4px 14px 24px}
+@media(min-width:600px){.wrap{grid-template-columns:1fr 1fr}.stats,#playpanel{grid-column:1/-1}.panel.settings{align-self:start}}
+</style>
+</head>
+<body>
+<header><h1>🎯 हेडशॉट ट्रेनर</h1><p>मोफत Aim आणि टच सराव • Vivo Y19 5G साठी अनुकूल</p></header>
+<main class="wrap">
+<section class="stats">
+ <div class="stat"><small>स्कोअर</small><strong id="score">0</strong></div>
+ <div class="stat"><small>अचूक हिट</small><strong id="hits">0</strong></div>
+ <div class="stat"><small>वेळ</small><strong id="time">30</strong></div>
+</section>
+<section class="panel" id="playpanel">
+ <h2 id="modeTitle">स्थिर लक्ष्य सराव</h2>
+ <div id="arena"><div id="message">मोड निवडा आणि <b>सराव सुरू करा</b> दाबा.<br>लक्ष्य दिसल्यावर त्यावर टॅप करा!</div></div>
+ <div class="actions" style="margin-top:10px"><button class="btn primary" id="start">▶ सराव सुरू करा</button><button class="btn" id="reset">↻ रीसेट</button></div>
+</section>
+<section class="panel">
+ <h2>सराव मोड</h2>
+ <div class="modes">
+  <button class="btn active" data-mode="static">🎯 स्थिर लक्ष्य</button>
+  <button class="btn" data-mode="moving">💫 हलणारे लक्ष्य</button>
+  <button class="btn" data-mode="reaction">⚡ प्रतिक्रिया चाचणी</button>
+  <button class="btn" data-mode="rapid">🔥 जलद टॅप</button>
+ </div>
+ <p class="note">30 सेकंदात शक्य तितक्या लक्ष्यांवर अचूक टॅप करा. हे स्वतंत्र ट्रेनिंग आहे—Free Fire गेमला नियंत्रित करत नाही.</p>
+</section>
+<section class="panel settings">
+ <h2>सराव सेटिंग्ज</h2>
+ <label for="size">लक्ष्याचा आकार: <span id="sizeVal">58</span> px</label>
+ <input id="size" type="range" min="38" max="82" value="58">
+ <label for="speed">हलणाऱ्या लक्ष्याचा वेग: <span id="speedVal">मध्यम</span></label>
+ <input id="speed" type="range" min="1" max="5" value="3">
+ <p class="note">टीप: हेडशॉट सरावासाठी आधी स्थिर लक्ष्य, नंतर हलणारे लक्ष्य निवडा. नंतर गेममध्ये तुमच्या आवडीनुसार सेंसिटिव्हिटी समायोजित करा.</p>
+</section>
+</main>
+<footer>सुरक्षित स्वतंत्र सराव ॲप • कोणतेही लॉगिन नाही • कोणतेही पैसे नाहीत • गेम हॅक किंवा ऑटो-फायर नाही</footer>
+<script>
+const arena=document.getElementById('arena'), message=document.getElementById('message');
+const scoreEl=document.getElementById('score'),hitsEl=document.getElementById('hits'),timeEl=document.getElementById('time');
+const title=document.getElementById('modeTitle'), startBtn=document.getElementById('start');
+let mode='static', score=0,hits=0,time=30,running=false,target=null,timer=null,moveTimer=null,moveX=50,moveY=50,dx=1,dy=.7;
+const names={static:'स्थिर लक्ष्य सराव',moving:'हलणारे लक्ष्य सराव',reaction:'प्रतिक्रिया चाचणी',rapid:'जलद टॅप सराव'};
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{if(running)return;mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));title.textContent=names[mode];}));
+document.getElementById('size').addEventListener('input',e=>{document.getElementById('sizeVal').textContent=e.target.value;if(target){target.style.width=e.target.value+'px';target.style.height=e.target.value+'px'}});
+document.getElementById('speed').addEventListener('input',e=>{document.getElementById('speedVal').textContent=['खूप कमी','कमी','मध्यम','जास्त','खूप जास्त'][e.target.value-1]});
+function placeTarget(){if(!running)return;if(target)target.remove();target=document.createElement('button');target.className='target';target.setAttribute('aria-label','लक्ष्य');const size=+document.getElementById('size').value;target.style.width=size+'px';target.style.height=size+'px';let x=10+Math.random()*80,y=15+Math.random()*70;target.style.left=x+'%';target.style.top=y+'%';moveX=x;moveY=y;target.addEventListener('pointerdown',e=>{e.preventDefault();if(!running)return;score+=10;hits++;scoreEl.textContent=score;hitsEl.textContent=hits;if(mode==='reaction')score+=5;placeTarget()});arena.appendChild(target);message.style.display='none'}
+function move(){if(!running||mode!=='moving'||!target)return;const v=+(document.getElementById('speed').value)*.22;moveX+=dx*v;moveY+=dy*v;if(moveX>91||moveX<9)dx*=-1;if(moveY>85||moveY<15)dy*=-1;target.style.left=moveX+'%';target.style.top=moveY+'%'}
+function stop(){running=false;clearInterval(timer);clearInterval(moveTimer);if(target){target.remove();target=null}message.style.display='grid';message.innerHTML=`सराव पूर्ण!<br><b>स्कोअर: ${score}</b><br>अचूक हिट: ${hits}<br>पुन्हा प्रयत्न करण्यासाठी सराव सुरू करा.`;startBtn.textContent='▶ पुन्हा सराव करा'}
+startBtn.addEventListener('click',()=>{if(running)return;score=0;hits=0;time=30;scoreEl.textContent=0;hitsEl.textContent=0;timeEl.textContent=30;running=true;startBtn.textContent='सराव सुरू आहे…';message.style.display='none';placeTarget();timer=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0)stop()},1000);moveTimer=setInterval(move,30)});
+document.getElementById('reset').addEventListener('click',()=>{stop();score=0;hits=0;time=30;scoreEl.textContent=0;hitsEl.textContent=0;timeEl.textContent=30;message.innerHTML='मोड निवडा आणि <b>सराव सुरू करा</b> दाबा.<br>लक्ष्य दिसल्यावर त्यावर टॅप करा!';startBtn.textContent='▶ सराव सुरू करा'});
+</script>
+</body>
+</html>
